@@ -5,6 +5,7 @@ import {
 	destinationOptions,
 	sendChoices,
 	sendSpecs,
+	simplifyComparison,
 	supplierOptions,
 } from '../shared';
 
@@ -76,6 +77,7 @@ export const productOperations: INodeProperties[] = [
 					'Compare product cost, shipping, delivered total and delivery time across suppliers for one configuration and destination',
 				routing: {
 					request: { method: 'POST', url: '/tools/compare_product' },
+					output: { postReceive: [simplifyComparison] },
 				},
 			},
 			{
@@ -356,6 +358,15 @@ export const productOperations: INodeProperties[] = [
 		routing: { send: { type: 'body', property: 'query' } },
 	},
 	choicesField(['getOptions', 'compare']),
+	{
+		displayName: 'Simplify',
+		name: 'simplify',
+		type: 'boolean',
+		default: true,
+		description:
+			'Whether to return one item per supplier with its price, shipping, delivered total, delivery days and profit, instead of the full comparison',
+		displayOptions: { show: { ...forProduct, operation: ['compare'] } },
+	},
 	{
 		displayName: 'Limit',
 		name: 'limit',

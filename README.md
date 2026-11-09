@@ -19,7 +19,7 @@ In n8n, open **Settings → Community Nodes → Install** and enter `n8n-nodes-p
 - **Search**: find products by type, brand or model (`hoodie`, `bella canvas 3001`). You can filter by category, supplier, brand, audience, specs and weight. Each result is a product with its starting delivered price.
 - **Get**: a product's specs, print methods and similar products.
 - **Get Options**: the sizes, colors and other configurations a product comes in.
-- **Compare Suppliers**: every supplier's product cost, shipping, delivered total and delivery days for one configuration. Optionally add your selling price or target margin, sales channel and shop location to get profit after platform fees. Add your current supplier and each row shows the difference per sale.
+- **Compare Suppliers**: every supplier's product cost, shipping, delivered total and delivery days for one configuration, one item per supplier with the current order kept. Optionally add your selling price or target margin, sales channel and shop location to get profit after platform fees. Add your current supplier and each row shows the difference per sale. Turn off **Simplify** to get the full comparison, including the product's other configurations.
 - **Find by Supplier Link**: paste a Printify, Printful, Gelato or other supplier product link to get the matching product, ready to compare.
 
 **Category**

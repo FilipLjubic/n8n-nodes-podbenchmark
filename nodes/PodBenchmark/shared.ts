@@ -2,6 +2,7 @@ import type {
 	IDataObject,
 	IExecuteSingleFunctions,
 	IHttpRequestOptions,
+	INodeExecutionData,
 	INodePropertyOptions,
 } from 'n8n-workflow';
 
@@ -142,4 +143,67 @@ export async function sendWithin(
 	body(requestOptions).within =
 		kind === 'percent' ? { kind: 'percent', percent: amount } : { kind: 'amount', amount };
 	return requestOptions;
+}
+
+type Offer = IDataObject & { profit?: IDataObject | null };
+
+const round = (value: unknown, digits: number): number | null =>
+	typeof value === 'number' ? Number(value.toFixed(digits)) : null;
+
+/**
+ * With Simplify on, turns a comparison into one item per supplier, cheapest first as the
+ * API orders them. Unknown prices stay null; they are never shown as zero.
+ */
+export async function simplifyComparison(
+	this: IExecuteSingleFunctions,
+	items: INodeExecutionData[],
+): Promise<INodeExecutionData[]> {
+	if (!(this.getNodeParameter('simplify', true) as boolean)) return items;
+	return items.flatMap((item) => {
+		const comparison = item.json;
+		const rows = (comparison.suppliers ?? []) as Array<{ offer?: Offer | null }>;
+		const product = (comparison.product ?? {}) as IDataObject;
+		return rows.flatMap(({ offer }) => {
+			if (!offer) return [];
+			const profit = offer.profit?.status === 'calculated' ? offer.profit : null;
+			return [
+				{
+					json: {
+						supplier: offer.supplier,
+						supplierId: offer.supplierId,
+						printProvider: offer.provider ?? null,
+						supplierProduct: offer.product ?? null,
+						productCost: offer.price ?? null,
+						shipping: offer.shipping ?? null,
+						duty: offer.duty ?? null,
+						delivered: offer.delivered ?? null,
+						currency: offer.currency ?? comparison.currency,
+						deliveryDaysMin: offer.deliveryDaysMin ?? null,
+						deliveryDaysMax: offer.deliveryDaysMax ?? null,
+						cheapest: offer.cheapest === true,
+						available: offer.available === true,
+						comparable: offer.comparable === true,
+						isYourSupplier: offer.isYourSupplier === true,
+						differencePerSale: offer.versusYours ?? null,
+						sellingPrice: profit?.sale ?? null,
+						platformFees: profit?.fees ?? null,
+						profit: profit?.keep ?? null,
+						marginPercent: round(
+							typeof profit?.margin === 'number' ? profit.margin * 100 : undefined,
+							1,
+						),
+						note: offer.note ?? null,
+						checkedAt: offer.checkedAt ?? null,
+						supplierLink: offer.actionUrl ?? offer.productUrl ?? null,
+						product: product.name ?? null,
+						productId: product.id ?? comparison.canonicalProductId ?? null,
+						configuration: comparison.optionLabel ?? null,
+						destination: comparison.destination,
+						comparisonUrl: product.url ?? null,
+					},
+					pairedItem: item.pairedItem,
+				},
+			];
+		});
+	});
 }
