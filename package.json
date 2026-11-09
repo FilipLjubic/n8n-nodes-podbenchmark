@@ -1,0 +1,62 @@
+{
+	"name": "n8n-nodes-podbenchmark",
+	"version": "0.1.0",
+	"description": "n8n node for POD Benchmark: compare print-on-demand supplier prices, shipping, delivered totals and delivery times across Printify, Printful, Gelato, Prodigi, CustomCat, Fourthwall, Inkthreadable, Apliiq, Artelo and merchOne.",
+	"license": "MIT",
+	"homepage": "https://podbenchmark.com",
+	"keywords": [
+		"n8n-community-node-package",
+		"n8n",
+		"print-on-demand",
+		"pod",
+		"printify",
+		"printful",
+		"gelato",
+		"prodigi",
+		"price-comparison",
+		"etsy",
+		"shopify"
+	],
+	"author": {
+		"name": "POD Benchmark",
+		"email": "hello@podbenchmark.com",
+		"url": "https://podbenchmark.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/FilipLjubic/n8n-nodes-podbenchmark.git"
+	},
+	"bugs": {
+		"url": "https://github.com/FilipLjubic/n8n-nodes-podbenchmark/issues"
+	},
+	"scripts": {
+		"build": "n8n-node build",
+		"build:watch": "tsc --watch",
+		"dev": "n8n-node dev",
+		"lint": "n8n-node lint",
+		"lint:fix": "n8n-node lint --fix",
+		"release": "n8n-node release",
+		"prepublishOnly": "n8n-node prerelease"
+	},
+	"files": [
+		"dist"
+	],
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"strict": true,
+		"credentials": [],
+		"nodes": [
+			"dist/nodes/PodBenchmark/PodBenchmark.node.js"
+		]
+	},
+	"devDependencies": {
+		"@n8n/node-cli": "^0.55.6",
+		"eslint": "9.32.0",
+		"prettier": "3.6.2",
+		"release-it": "^21.1.0",
+		"typescript": "5.9.2"
+	},
+	"peerDependencies": {
+		"n8n-workflow": "*"
+	}
+}

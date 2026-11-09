@@ -1,0 +1,13 @@
+{
+	"node": "n8n-nodes-podbenchmark.podBenchmark",
+	"nodeVersion": "1.0",
+	"codexVersion": "1.0",
+	"categories": ["Sales", "Analytics"],
+	"resources": {
+		"primaryDocumentation": [
+			{
+				"url": "https://github.com/FilipLjubic/n8n-nodes-podbenchmark#readme"
+			}
+		]
+	}
+}
