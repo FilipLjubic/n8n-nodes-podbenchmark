@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- The Get Options action reads "Get product options" in the node picker.
+
 ## 0.1.2
 
 - Simplified Compare Suppliers items lead with supplier, delivered total and currency, so they read well in n8n's table view.

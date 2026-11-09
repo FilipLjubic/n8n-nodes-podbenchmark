@@ -102,7 +102,7 @@ export const productOperations: INodeProperties[] = [
 			{
 				name: 'Get Options',
 				value: 'getOptions',
-				action: 'Get a product s options',
+				action: 'Get product options',
 				description: 'List the sizes, colors and other configurations a product comes in',
 				routing: {
 					request: { method: 'POST', url: '/tools/get_product_options' },
