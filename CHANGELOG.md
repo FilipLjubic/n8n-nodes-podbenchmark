@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.2
+
+- Simplified Compare Suppliers items lead with supplier, delivered total and currency, so they read well in n8n's table view.
+
 ## 0.1.1
 
 - Compare Suppliers returns one item per supplier by default (Simplify), with product cost, shipping, delivered total, delivery days and profit fields. Turn Simplify off for the full response.

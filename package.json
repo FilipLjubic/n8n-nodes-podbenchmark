@@ -1,6 +1,6 @@
 {
 	"name": "n8n-nodes-podbenchmark",
-	"version": "0.1.1",
+	"version": "0.1.2",
 	"description": "n8n node for POD Benchmark: compare print-on-demand supplier prices, shipping, delivered totals and delivery times across Printify, Printful, Gelato, Prodigi, CustomCat, Fourthwall, Inkthreadable, Apliiq, Artelo and merchOne.",
 	"license": "MIT",
 	"homepage": "https://podbenchmark.com",
